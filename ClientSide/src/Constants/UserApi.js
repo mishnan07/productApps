@@ -1,2 +1,4 @@
-export const userAPI = "http://localhost:3000/";
-// export const userAPI = 'https://product-apps-api.vercel.app/'
+
+
+// Update the backend server URL in your frontend code
+export const userAPI = "https://product-apps-api.vercel.app/";

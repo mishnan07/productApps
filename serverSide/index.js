@@ -9,11 +9,12 @@ const app = express();
 app.use(express.json({ limit: '30mb', extended: true }));
 app.use(express.urlencoded({ limit: '30mb', extended: true }));
 
-// Use cors middleware
+// Use cors middleware with credentials option
 app.use(cors({
   origin: 'https://product-apps-frontend.vercel.app',
   methods: 'GET, POST, PUT, DELETE',
   headers: 'Content-Type',
+  credentials: true,  // Add this line
 }));
 
 app.use(express.static('public'));
@@ -24,7 +25,12 @@ app.use('/', userRoute);
 const PORT = process.env.PORT;
 const DATABASE_URL = process.env.DATABASE_URL;
 
-mongoose.connect(DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(DATABASE_URL, {
+  useCreateIndex: true,
+  useFindAndModify: false,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
   .then(() => {
     app.listen(PORT, () => console.log('Server is Running .....'));
   })
