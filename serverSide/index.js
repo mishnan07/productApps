@@ -1,34 +1,33 @@
-import express from 'express'
-import mongoose from 'mongoose'
-import cors from 'cors'
-import dotenv from 'dotenv'
-import userRoute from './Routes/userRoute.js'
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import userRoute from './Routes/userRoute.js';
 
+const app = express();
 
+app.use(express.json({ limit: '30mb', extended: true }));
+app.use(express.urlencoded({ limit: '30mb', extended: true }));
 
-const app = express()
-  
+// Use cors middleware
+app.use(cors({
+  origin: 'https://product-apps-frontend.vercel.app',
+  methods: 'GET, POST, PUT, DELETE',
+  headers: 'Content-Type',
+}));
 
-app.use(express.json({limit:'30mb',extended:true}))
-app.use(express.urlencoded({limit:'30mb',extended:true}))
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://product-apps-frontend.vercel.app');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-});
-app.use(express.static('public'))
-dotenv.config()
+app.use(express.static('public'));
+dotenv.config();
 
-app.use('/',userRoute)  
+app.use('/', userRoute);
 
+const PORT = process.env.PORT;
+const DATABASE_URL = process.env.DATABASE_URL;
 
-const PORT = process.env.PORT
-const DATABASE_URL = process.env.DATABASE_URL
-
-mongoose.connect(DATABASE_URL)
-.then(()=>{
-    app.listen(PORT,()=>console.log('Server is Running .....'))
-}).catch((err)=>{
-    console.log('database not connected : ',err);
-})
+mongoose.connect(DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    app.listen(PORT, () => console.log('Server is Running .....'));
+  })
+  .catch((err) => {
+    console.log('Database not connected:', err);
+  });
