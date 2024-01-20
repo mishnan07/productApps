@@ -1,6 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import cors from 'cors';
+import cors from 'cors'; // Import the cors package
 import dotenv from 'dotenv';
 import userRoute from './Routes/userRoute.js';
 
@@ -9,12 +9,12 @@ const app = express();
 app.use(express.json({ limit: '30mb', extended: true }));
 app.use(express.urlencoded({ limit: '30mb', extended: true }));
 
-// Use cors middleware with credentials option
+// Use cors middleware
 app.use(cors({
-  origin: 'https://product-apps-frontend.vercel.app',
+  origin: 'https://product-apps-frontend.vercel.app', // Specify your frontend's origin
   methods: 'GET, POST, PUT, DELETE',
   headers: 'Content-Type',
-  credentials: true,  // Add this line
+  credentials: true, // Include this line if you are using credentials (e.g., cookies)
 }));
 
 app.use(express.static('public'));
