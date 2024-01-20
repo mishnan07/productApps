@@ -12,7 +12,7 @@ const app = express()
 app.use(express.json({limit:'30mb',extended:true}))
 app.use(express.urlencoded({limit:'30mb',extended:true}))
 app.use(cors(
-   { origin:['https://product-apps-frontend.vercel.app'],
+   { origin:["https://product-apps-frontend.vercel.app","https://product-apps-api.vercel.app"],
      methods:["POST","GET"],
      credentials:true
    }
