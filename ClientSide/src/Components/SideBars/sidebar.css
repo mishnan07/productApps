@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
+
+.font-family-karla { font-family: Karla, sans-serif; }
+
+/* Use product form color */
+.bg-sidebar { background: #ed64a6; } /* bg-pink-500 color */
+.cta-btn { color: #ed64a6; } /* bg-pink-500 color */
+.upgrade-btn { background: #ed64a6; } /* bg-pink-500 color */
+.upgrade-btn:hover { background: #d53f8c; } /* Darker shade on hover */
+.active-nav-link { background: #ed64a6; } /* bg-pink-500 color */
+.nav-item:hover { background: #ed64a6; } /* bg-pink-500 color */
+.account-link:hover { background: #d53f8c; } /* Darker shade on hover */
